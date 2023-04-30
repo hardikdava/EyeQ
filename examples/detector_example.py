@@ -6,10 +6,10 @@ from eyeq.inference_engine import InferenceEngine
 from eyeq.utils.painter import draw_boxes
 
 model_config = dict()
-model_config["yolov5_onnx"] = True
+model_config["yolov5_onnx"] = False
 model_config["yolov6_onnx"] = False
 model_config["yolov7_onnx"] = False
-model_config["yolov8_onnx"] = False
+model_config["yolov8_onnx"] = True
 model_config["damoyolo_tinynasL18_Ns"] = False
 
 image_path = "../data/images/zidane.jpg"
