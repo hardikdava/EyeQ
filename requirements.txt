@@ -1,0 +1,7 @@
+numpy
+opencv-python
+onnx
+onnxruntime
+supervision
+#pip install --extra-index-url https://google-coral.github.io/py-repo/ pycoral~=2.0
+
