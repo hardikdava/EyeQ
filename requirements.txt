@@ -1,4 +1,6 @@
 numpy
+fastapi
+uvicorn
 opencv-python
 onnx
 onnxruntime

@@ -11,6 +11,7 @@ class InferenceEngine:
     def load_network(self, model_id: str, model_path: str):
         if model_id in self.active_models:
             self.active_models[model_id]["model"].load_network(model_path=model_path)
+            print(f"Model {model_path} is loaded with id {model_id}")
         return True
 
     def set_labelmap(self, model_id: str, labelmap: dict):

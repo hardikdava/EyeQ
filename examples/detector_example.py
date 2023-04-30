@@ -2,16 +2,14 @@ import time
 
 import cv2
 
-
-
-
 from eyeq.inference_engine import InferenceEngine
 from eyeq.utils.painter import draw_detections
 
 model_config = dict()
 model_config["yolov5_onnx"] = False
-model_config["yolov6_onnx"] = True
+model_config["yolov6_onnx"] = False
 model_config["yolov7_onnx"] = False
+model_config["yolov8_onnx"] = True
 
 
 image_path = "../data/images/zidane.jpg"
@@ -34,6 +32,10 @@ for key, item in model_config.items():
             from eyeq.detectors.yolov6.yolov6_onnx import V6ONNX
             model_path = "../data/weights/yolov6s_base_bs1.onnx"
             detector = V6ONNX(conf_thresh=0.35, iou_thresh=0.4)
+        elif key == "yolov8_onnx":
+            from eyeq.detectors.yolov8.yolov8_onnx import V8ONNX
+            model_path = "../data/weights/yolov8s.onnx"
+            detector = V8ONNX(conf_thresh=0.35, iou_thresh=0.4)
         break
 
 
