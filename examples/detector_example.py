@@ -3,14 +3,14 @@ import time
 import cv2
 
 from eyeq.inference_engine import InferenceEngine
-from eyeq.utils.painter import draw_detections
+from eyeq.utils.painter import draw_boxes
 
 model_config = dict()
-model_config["yolov5_onnx"] = False
+model_config["yolov5_onnx"] = True
 model_config["yolov6_onnx"] = False
 model_config["yolov7_onnx"] = False
-model_config["yolov8_onnx"] = True
-
+model_config["yolov8_onnx"] = False
+model_config["damoyolo_tinynasL18_Ns"] = False
 
 image_path = "../data/images/zidane.jpg"
 img = cv2.imread(image_path)
@@ -36,6 +36,10 @@ for key, item in model_config.items():
             from eyeq.detectors.yolov8.yolov8_onnx import V8ONNX
             model_path = "../data/weights/yolov8s.onnx"
             detector = V8ONNX(conf_thresh=0.35, iou_thresh=0.4)
+        elif key == "damoyolo_tinynasL18_Ns":
+            model_path = "../data/weights/damoyolo_tinynasL18_Ns.onnx"
+            from eyeq.detectors.damoyolo.damoyolo_onnx import DamoOnnx
+            detector = DamoOnnx(conf_thresh=0.5, iou_thresh=0.4)
         break
 
 
@@ -52,6 +56,6 @@ counter = 0
 detections = inference_engine.forward(model_id=detector.model_id, img=img)
 
 if detections:
-    img = draw_detections(detections=detections, image=img)
+    img = draw_boxes(detections=detections, image=img)
 cv2.imshow("image", img)
 cv2.waitKey(0)

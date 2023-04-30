@@ -86,13 +86,15 @@ def nms(boxes, scores, threshold):
     res = keep[idxs[ids_to_keep]]
     return res
 
-def non_max_suppression(prediction, conf_thres=0.25, iou_thres=0.45, agnostic=False, max_det=300):
+def non_max_suppression(prediction, conf_thres=0.25, iou_thres=0.45, agnostic=False, max_det=300, nm=0):
 
     xc = prediction[..., 4] > conf_thres  # candidates
 
     # Settings
     min_wh, max_wh = 2, 640  # (pixels) minimum and maximum box width and height
     max_nms = 6000  # maximum number of boxes into torchvision.ops.nms()
+    nc = prediction.shape[2] - nm - 5
+    mi = 5 + nc  # mask start index
 
     output = [np.zeros((0, 6))] * prediction.shape[0]
     for xi, x in enumerate(prediction):  # image index, image inference
@@ -109,11 +111,13 @@ def non_max_suppression(prediction, conf_thres=0.25, iou_thres=0.45, agnostic=Fa
 
         # Box (center x, center y, width, height) to (x1, y1, x2, y2)
         box = xywh2xyxy(x[:, :4])
+        mask = x[:, mi:]  # zero columns if no masks
 
         # Detections matrix nx6 (xyxy, conf, cls)
-        conf = np.amax(x[:, 5:85], axis=1, keepdims=True)
-        j = np.argmax(x[:, 5:85], axis=1).reshape(conf.shape)
-        x = np.concatenate((box, conf, j.astype(float)), axis=1)[conf.flatten() > conf_thres]
+        conf = np.amax(x[:, 5:mi], axis=1, keepdims=True)
+        j = np.argmax(x[:, 5:mi], axis=1).reshape(conf.shape)
+
+        x = np.concatenate((box, conf, j.astype(float), mask), axis=1)[conf.flatten() > conf_thres]
 
         # Check shape
         n = x.shape[0]  # number of boxes

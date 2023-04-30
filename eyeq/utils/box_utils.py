@@ -1,6 +1,10 @@
 import numpy as np
 
 
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+
 def xywh2xyxy(x):
     # Convert nx4 boxes from [x, y, w, h] to [x1, y1, x2, y2] where xy1=top-left, xy2=bottom-right
     y = np.copy(x)

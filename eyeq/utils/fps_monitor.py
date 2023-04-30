@@ -23,7 +23,8 @@ class FpsMonitor:
         :return: average fps of last 30 ticks
         """
         with self.lock:
-            processed_times = self.processed_times
-            return len(processed_times) / sum(processed_times)
+            if len(self.processed_times)>0:
+                processed_times = self.processed_times
+                return len(processed_times) / sum(processed_times)
 
 
