@@ -9,7 +9,7 @@
 - [x] yolov8
 - [x] yolovx
 - [x] damoyolo
-- [ ] yolov5u
+- [x] yolov5u
 - [ ] yolor
 
 ### Instance Segmentation:
