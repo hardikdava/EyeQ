@@ -6,12 +6,13 @@ from eyeq.inference_engine import InferenceEngine
 from eyeq.utils.painter import draw_boxes
 
 model_config = dict()
-model_config["yolox_onnx"] = True
+model_config["yolox_onnx"] = False
 model_config["yolov5_onnx"] = False
 model_config["yolov6_onnx"] = False
 model_config["yolov7_onnx"] = False
 model_config["yolov8_onnx"] = False
 model_config["damoyolo_tinynasL18_Ns"] = False
+model_config["yolov5u_onnx"] = True
 
 image_path = "../data/images/zidane.jpg"
 img = cv2.imread(image_path)
@@ -45,6 +46,10 @@ for key, item in model_config.items():
             model_path = "../data/weights/yolox_tiny.onnx"
             from eyeq.detectors.yolox.yolox_onnx import VXONNX
             detector = VXONNX(conf_thresh=0.3, iou_thresh=0.4)
+        elif key == "yolov5u_onnx":
+            model_path = "../data/weights/yolov5su.onnx"
+            from eyeq.detectors.yolov5u.yolov5u_onnx import V5uONNX
+            detector = V5uONNX(conf_thresh=0.25, iou_thresh=0.4)
         break
 
 

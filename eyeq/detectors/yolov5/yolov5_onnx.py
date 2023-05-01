@@ -40,9 +40,10 @@ class V5ONNX(OnnxDetectors):
         pred = non_max_suppression(output, conf_thres=self.conf_thresh, iou_thres=self.iou_thresh, agnostic=agnostic)
 
         pred = np.array(pred[0])
-        pred = self._process_predictions(pred, full_image, pad)
 
         boxes = pred[:, 0:4]
+        boxes = self._process_predictions(boxes, full_image, pad)
+
         class_ids = pred[:, -1].astype(int)
         confidence = pred[:, 4]
         detections = sv.Detections(xyxy=boxes, class_id=class_ids, confidence=confidence)

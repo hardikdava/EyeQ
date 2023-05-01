@@ -37,17 +37,17 @@ def draw_masks(image: np.ndarray, detections: sv.Detections, label_maps: dict=No
 
 
 # TODO: Improve drawing method
-def draw_tracklets(image: np.ndarray, detections: sv.Detections, label_maps: dict) -> np.ndarray:
+def draw_tracklets(image: np.ndarray, detections: sv.Detections) -> np.ndarray:
     box_annotator = sv.BoxAnnotator()
-    if label_maps:
-        labels = [
-            f"{label_maps[class_id]} {confidence:0.2f}"
-            for _, _, confidence, class_id, _
-            in detections]
-    else:
-        labels = [
-            f"{class_id} {confidence:0.2f}"
-            for _, _, confidence, class_id, _
-            in detections]
+
+    class_ids = detections.class_id
+    tracker_ids = detections.tracker_id
+    detections.tracker_id = class_ids
+    detections.class_id = tracker_ids.astype(int)
+
+    labels = [
+        f"{class_id}"
+        for _, _, _, class_id, _
+        in detections]
     annotated_frame = box_annotator.annotate(scene=image.copy(), detections=detections, labels=labels)
     return annotated_frame
