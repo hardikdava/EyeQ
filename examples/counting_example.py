@@ -7,6 +7,7 @@ from supervision.geometry.core import Point
 from eyeq.detectors.yolov5.yolov5_onnx import V5ONNX
 from eyeq.inference_engine import InferenceEngine
 from eyeq.trackers.byte_track.byte_tracker import BYTETracker
+from eyeq.trackers.nms_sort.nms_sort import NmsSort
 from eyeq.utils.painter import draw_tracklets
 from eyeq.utils.video_capture_extended import VideoCaptureExtended
 
@@ -29,6 +30,8 @@ class ByteTrackConfig:
 video_path = "../data/images/2.mp4"
 model_path = "../data/weights/yolov5su.onnx"
 
+
+
 line_counter = LineZone(start=LINE_START, end=LINE_END)
 
 line_annotator = LineZoneAnnotator()
@@ -38,7 +41,8 @@ cap = VideoCaptureExtended(video_path)
 inference_engine = InferenceEngine()
 detector = V5ONNX(conf_thresh=0.1, iou_thresh=0.5)
 
-tracker = BYTETracker(config=ByteTrackConfig)
+# tracker = BYTETracker(config=ByteTrackConfig)
+tracker = NmsSort()
 
 inference_engine.register_model(model=detector)
 inference_engine.load_network(model_id=detector.model_id, model_path=model_path)
@@ -51,7 +55,7 @@ while True:
     if not ret:
         break
     detections = inference_engine.forward(model_id=detector.model_id, img=img)
-    tracklets = tracker.update(results=detections, img=img)
+    tracklets = tracker.update(detections=detections)
 
     if tracklets:
         img = draw_tracklets(detections=tracklets, image=img)
