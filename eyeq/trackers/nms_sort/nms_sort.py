@@ -9,7 +9,7 @@ from eyeq.trackers.nms_sort.kalman_utilities import iou_matrix, iom_matrix, conv
 from eyeq.utils.non_maximum_suppression import nms
 
 
-class NmsSort:
+class NmsSortTracker:
     def __init__(self, parameter: dict = None):
         self.frame_count = 0
         self.traj, self.objects = dict(), dict()  # The currently tracked objects and all used objects accumulated

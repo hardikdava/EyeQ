@@ -7,7 +7,7 @@ from eyeq.utils.non_maximum_suppression import nms
 from eyeq.utils.onnx_utils import OnnxDetectors
 
 
-class V7ONNX(OnnxDetectors):
+class Yolov7onnxDet(OnnxDetectors):
     def __init__(self,  conf_thresh=0.35, iou_thresh=0.5, max_det=300, use_cuda=False):
         super().__init__()
         self.model = None

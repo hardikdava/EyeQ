@@ -1,14 +1,12 @@
-from eyeq.utils.video_capture_extended import VideoCaptureExtended
-from eyeq.detectors.yolov5.yolov5_onnx import V5ONNX
-from eyeq.utils.painter import draw_boxes, draw_tracklets
-from eyeq.inference_engine import InferenceEngine
-
-from eyeq.trackers.byte_track.byte_tracker import BYTETracker
-
-
+import time
 
 import cv2
-import time
+
+from eyeq.detectors.yolov5.yolov5_onnx import V5ONNX
+from eyeq.inference_engine import InferenceEngine
+from eyeq.trackers.byte_track.byte_tracker import BYTETracker
+from eyeq.utils.painter import draw_tracklets
+from eyeq.utils.video_capture_extended import VideoCaptureExtended
 
 
 class ByteTrackConfig:

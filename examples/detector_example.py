@@ -1,5 +1,3 @@
-import time
-
 import cv2
 
 from eyeq.inference_engine import InferenceEngine
@@ -23,33 +21,40 @@ model_path = None
 for key, item in model_config.items():
     if model_config[key] == True:
         if key == "yolov5_onnx":
-            from eyeq.detectors.yolov5.yolov5_onnx import V5ONNX
+            from eyeq import Yolov5onnxDet
+
             model_path = "../data/weights/yolov5s.onnx"
-            detector = V5ONNX(conf_thresh=0.2, iou_thresh=0.4)
+            detector = Yolov5onnxDet(conf_thresh=0.2, iou_thresh=0.4)
         elif key == "yolov7_onnx":
-            from eyeq.detectors.yolov7.yolov7_onnx import V7ONNX
+            from eyeq import Yolov7onnxDet
+
             model_path = "../data/weights/yolov7-tiny.onnx"
-            detector = V7ONNX(conf_thresh=0.2, iou_thresh=0.4)
+            detector = Yolov7onnxDet(conf_thresh=0.2, iou_thresh=0.4)
         elif key == "yolov6_onnx":
-            from eyeq.detectors.yolov6.yolov6_onnx import V6ONNX
+            from eyeq import Yolov6onnxDet
+
             model_path = "../data/weights/yolov6s_base_bs1.onnx"
-            detector = V6ONNX(conf_thresh=0.35, iou_thresh=0.4)
+            detector = Yolov6onnxDet(conf_thresh=0.35, iou_thresh=0.4)
         elif key == "yolov8_onnx":
-            from eyeq.detectors.yolov8.yolov8_onnx import V8ONNX
+            from eyeq import Yolov8onnxDet
+
             model_path = "../data/weights/yolov8s.onnx"
-            detector = V8ONNX(conf_thresh=0.35, iou_thresh=0.4)
+            detector = Yolov8onnxDet(conf_thresh=0.35, iou_thresh=0.4)
         elif key == "damoyolo_tinynasL18_Ns":
             model_path = "../data/weights/damoyolo_tinynasL18_Ns.onnx"
-            from eyeq.detectors.damoyolo.damoyolo_onnx import DamoOnnx
-            detector = DamoOnnx(conf_thresh=0.5, iou_thresh=0.4)
+            from eyeq import DamoYoloonnxDet
+
+            detector = DamoYoloonnxDet(conf_thresh=0.5, iou_thresh=0.4)
         elif key == "yolox_onnx":
             model_path = "../data/weights/yolox_tiny.onnx"
-            from eyeq.detectors.yolox.yolox_onnx import VXONNX
-            detector = VXONNX(conf_thresh=0.3, iou_thresh=0.4)
+            from eyeq import YoloXonnxDet
+
+            detector = YoloXonnxDet(conf_thresh=0.3, iou_thresh=0.4)
         elif key == "yolov5u_onnx":
             model_path = "../data/weights/yolov5su.onnx"
-            from eyeq.detectors.yolov5u.yolov5u_onnx import V5uONNX
-            detector = V5uONNX(conf_thresh=0.25, iou_thresh=0.4)
+            from eyeq import Yolov5uonnxDet
+
+            detector = Yolov5uonnxDet(conf_thresh=0.25, iou_thresh=0.4)
         break
 
 

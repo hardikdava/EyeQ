@@ -8,7 +8,7 @@ from eyeq.utils.onnx_utils import OnnxDetectors
 from eyeq.utils.box_utils import xywh2xyxy
 
 
-class DamoOnnx(OnnxDetectors):
+class DamoYoloonnxDet(OnnxDetectors):
 
     def __init__(self, conf_thresh=0.2, iou_thresh=0.5, max_det=300):
         super().__init__()

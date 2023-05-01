@@ -8,12 +8,11 @@ import json
 from pydantic import BaseModel
 
 
-
-
 from eyeq.inference_engine import InferenceEngine
-from eyeq.detectors.yolov5.yolov5_onnx import V5ONNX
-from eyeq.detectors.yolov6.yolov6_onnx import V6ONNX
-from eyeq.detectors.yolov7.yolov7_onnx import V7ONNX
+from eyeq import Yolov5onnxDet
+from eyeq import Yolov6onnxDet
+from eyeq import Yolov7onnxDet
+from eyeq import Yolov8onnxDet
 
 
 class InferData(BaseModel):
@@ -38,11 +37,11 @@ def load_model(model_path: str, model_type: str):
     detection_model = None
     model_id = None
     if model_type == "yolov5_detector_onnx":
-        detection_model = V5ONNX()
+        detection_model = Yolov5onnxDet()
     elif model_type == "yolov6_detector_onnx":
-        detection_model = V6ONNX()
+        detection_model = Yolov6onnxDet()
     elif model_type == "yolov7_detector_onnx":
-        detection_model = V7ONNX()
+        detection_model = Yolov7onnxDet()
     if detection_model:
         inference_engine.register_model(model=detection_model)
         model_id = detection_model.model_id
