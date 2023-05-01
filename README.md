@@ -24,8 +24,8 @@
 - [ ] sort
 - [ ] deepsort
 - [ ] ocsort
-- [ ] bytetrack
-- [ ] NMSSort
+- [x] bytetrack
+- [x] NMSSort
 
 ### Server Functionalities:
 
@@ -36,5 +36,9 @@
 - [ ] mqtt
 - [ ] Async Server
 - [ ] Priority
+
+### Application:
+
+- [x] Single Line Counter
 
 Design Async Inference Server for edgetpu, tensorrt, onnx models with low priority and high priority functionality
