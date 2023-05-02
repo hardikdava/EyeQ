@@ -10,7 +10,6 @@
 - [x] yolovx
 - [x] damoyolo
 - [x] yolov5u
-- [ ] yolor
 
 ### Instance Segmentation:
 
@@ -40,5 +39,6 @@
 ### Application:
 
 - [x] Single Line Counter
+- [ ] model optimization
 
 Design Async Inference Server for edgetpu, tensorrt, onnx models with low priority and high priority functionality
