@@ -39,6 +39,6 @@
 ### Application:
 
 - [x] Single Line Counter
-- [ ] model optimization
+- [ ] model optimization such as Quantization, sparsity and pruning
 
 Design Async Inference Server for edgetpu, tensorrt, onnx models with low priority and high priority functionality
