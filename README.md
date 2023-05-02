@@ -36,6 +36,12 @@
 - [ ] Async Server
 - [ ] Priority
 
+### Image Enhancement:
+
+- [] GAN
+- [] SRGAN
+
+
 ### Application:
 
 - [x] Single Line Counter
