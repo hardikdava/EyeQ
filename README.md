@@ -1,13 +1,13 @@
 # EyeQ
 
 
-EyeQ is a minimal yolo inference pakackge. Currently it supports following detectors in onnx runtime. It works with minimal dependencies. It is designed in such a manner to run on edge devices also.
+EyeQ is a minimal computer vision inference pakackge. Currently it supports following detectors in onnx runtime. It works with minimal dependencies. It is designed in such a manner to run on edge devices also.
 
 --------------------
 ### Object Detection:
 | Detector | onnx |
-|--|--| --|
-| [yolov5](https://github.com/ultralytics/yolov5) | `:heavy_check_mark:` 
+|--|--|
+| [yolov5](https://github.com/ultralytics/yolov5) | `:heavy_check_mark:`| 
 | [yolov6](https://github.com/meituan/YOLOv6) | `:heavy_check_mark:` |
 | [yolov7](https://github.com/WongKinYiu/yolov7) | `:heavy_check_mark:` | 
 | [yolov8](https://github.com/ultralytics/ultralytics) | `:heavy_check_mark:` | 
@@ -18,12 +18,11 @@ EyeQ is a minimal yolo inference pakackge. Currently it supports following detec
 
 ### Instance Segmentation:
 --------------------
-| Detector Name | onnx | Notebook |
-|--|--| --| --| 
-| [yolov5](https://github.com/ultralytics/yolov5) | `:heavy_check_mark:` | |
-| [yolov7](https://github.com/WongKinYiu/yolov7) | #TODO |  | 
-| [yolov8](https://github.com/ultralytics/ultralytics) | `:heavy_check_mark:` |  | 
-
+| Detector Name | onnx |
+|--|--|
+| [yolov5](https://github.com/ultralytics/yolov5) | `:heavy_check_mark:` |
+| [yolov7](https://github.com/WongKinYiu/yolov7) | #TODO |  
+| [yolov8](https://github.com/ultralytics/ultralytics) | `:heavy_check_mark:` |  
 
 ### Installation:
 ```
