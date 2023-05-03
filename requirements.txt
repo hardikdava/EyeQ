@@ -4,6 +4,7 @@ uvicorn
 opencv-python
 onnx
 onnxruntime
+onnxconverter-common
 supervision
 #pip install --extra-index-url https://google-coral.github.io/py-repo/ pycoral~=2.0
 
