@@ -12,7 +12,3 @@ from eyeq.detectors.damoyolo.damoyolo_onnx import DamoYoloonnxDet
 # import all segmentors here
 from eyeq.segmentors.yolov5.yolov5_onnx import Yolov5onnxSeg
 from eyeq.segmentors.yolov8.yolov8_onnx import Yolov8onnxSeg
-
-# import all trackers here
-from eyeq.trackers.byte_track.byte_tracker import BYTETracker
-from eyeq.trackers.nms_sort.nms_sort import NmsSortTracker
