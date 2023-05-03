@@ -1,5 +1,9 @@
 # EyeQ
 
+### Benchmark and Evaluation:
+
+- [] onemetric
+
 
 ### Detectors:
 
@@ -10,7 +14,6 @@
 - [x] yolovx
 - [x] damoyolo
 - [x] yolov5u
-- [ ] yolor
 
 ### Instance Segmentation:
 
@@ -37,8 +40,15 @@
 - [ ] Async Server
 - [ ] Priority
 
+### Image Enhancement:
+
+- [] GAN
+- [] SRGAN
+
+
 ### Application:
 
 - [x] Single Line Counter
+- [ ] model optimization such as Quantization, sparsity and pruning
 
 Design Async Inference Server for edgetpu, tensorrt, onnx models with low priority and high priority functionality
