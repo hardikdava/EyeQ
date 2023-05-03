@@ -11,7 +11,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="EyeQ Inference Engine",
+    name="EyeQ",
     version=version,
     author="hardikdava",
     author_email="hardik1901dava@gmail.com",
