@@ -22,14 +22,6 @@
 - [x] yolov8
 - [ ] yolop
 
-### Tracker:
-
-- [ ] sort
-- [ ] deepsort
-- [ ] ocsort
-- [x] bytetrack
-- [x] NMSSort
-
 ### Server Functionalities:
 
 - [x] REST
