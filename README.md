@@ -1,46 +1,29 @@
 # EyeQ
 
-### Benchmark and Evaluation:
 
-- [] onemetric
+EyeQ is a minimal yolo inference pakackge. Currently it supports following detectors in onnx runtime. It works with minimal dependencies. It is designed in such a manner to run on edge devices also.
 
 
-### Detectors:
+### Object Detection:
+| Detector | onnx |
+|--|--|
+| [yolov5](https://github.com/ultralytics/yolov5) | `:heavy_check_mark:` 
+| [yolov6](https://github.com/meituan/YOLOv6) | `:heavy_check_mark:` |
+| [yolov7](https://github.com/WongKinYiu/yolov7) | `:heavy_check_mark:` | 
+| [yolov8](https://github.com/ultralytics/ultralytics) | `:heavy_check_mark:` | 
+| [yolov5u](https://github.com/ultralytics/ultralytics) | `:heavy_check_mark:` |
+| [yoloX](https://github.com/Megvii-BaseDetection/YOLOX) | `:heavy_check_mark:` |
+| [Damo-yolo](https://github.com/tinyvision/DAMO-YOLO) | `:heavy_check_mark:` |
 
-- [x] yolov5
-- [x] yolov6
-- [x] yolov7
-- [x] yolov8
-- [x] yolovx
-- [x] damoyolo
-- [x] yolov5u
 
 ### Instance Segmentation:
+--------------------
+| Detector Name | onnx |
+|--|--|
+| [yolov5](https://github.com/ultralytics/yolov5) | `:heavy_check_mark:` |
+| [yolov7](https://github.com/WongKinYiu/yolov7) | #TODO | 
+| [yolov8](https://github.com/ultralytics/ultralytics) | `:heavy_check_mark:` | 
 
-- [x] yolov5
-- [ ] yolov7
-- [x] yolov8
-- [ ] yolop
-
-### Server Functionalities:
-
-- [x] REST
-- [ ] streamlit
-- [ ] gradio
-- [ ] kafka
-- [ ] mqtt
-- [ ] Async Server
-- [ ] Priority
-
-### Image Enhancement:
-
-- [] GAN
-- [] SRGAN
+### References:
 
 
-### Application:
-
-- [x] Single Line Counter
-- [ ] model optimization such as Quantization, sparsity and pruning
-
-Design Async Inference Server for edgetpu, tensorrt, onnx models with low priority and high priority functionality
