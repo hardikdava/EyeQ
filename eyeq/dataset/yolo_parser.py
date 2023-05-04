@@ -51,7 +51,7 @@ class YoloLoader:
         return [s_b.join(x.rsplit(s_a, 1)).rsplit('.', 1)[0] + '.txt' for x in img_paths]
 
     @staticmethod
-    def read_detection_file(image_path: str, file_path: str, is_gt=True):
+    def read_image_and_detections(image_path: str, file_path: str):
         """
         :return: read and return detections of given filepath
         """
@@ -59,6 +59,7 @@ class YoloLoader:
         class_id = []
         confidence = []
         detections = sv.Detections.empty()
+        img = None
         if os.path.exists(file_path):
             img = cv2.imread(image_path)
             img_h, img_w, _ = img.shape
@@ -68,10 +69,7 @@ class YoloLoader:
                     bbox = [float(x) for x in data[1:5]]
                     xyxy.append(bbox)
                     class_id.append(int(data[0]))
-                    if is_gt:
-                        confidence.append(1)
-                    else:
-                        confidence.append(float(data[-1]))
+                    confidence.append(1)
 
             xyxy = np.asarray(xyxy)
             class_id = np.asarray(class_id)
@@ -80,7 +78,7 @@ class YoloLoader:
                 xyxy = xywh2xyxy(xyxy)
                 xyxy = denormalize(detections=xyxy, img_h=img_h, img_w=img_w)
             detections = sv.Detections(xyxy=xyxy, class_id=class_id, confidence=confidence)
-        return detections
+        return img, detections
 
     def get_images_list(self, directory_list) -> list:
         """
