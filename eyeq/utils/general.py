@@ -1,59 +1,41 @@
-# SuperFastPython.com
-# example of using the asyncio priority queue
-from time import sleep
-from random import random
-from random import randint
-import asyncio
+import yaml
+import glob
+import json
+import os
+from typing import Dict, List
+from utils.namespaces import FileTypes, ImageFormats
 
 
-# generate work
-async def producer(queue):
-    print('Producer: Running')
-    # generate work
-    for i in range(10):
-        # generate a value
-        value = random()
-        # generate a priority
-        priority = randint(0, 10)
-        # create an item
-        item = (priority, value)
-        # add to the queue
-        print(f'>put {item}')
-        await queue.put(item)
-    # wait for all items to be processed
-    await queue.join()
-    # send sentinel value
-    await queue.put(None)
-    print('Producer: Done')
+def yaml_load(file='data.yaml') -> Dict:
+    # Single-line safe yaml loading
+    with open(file, errors='ignore') as f:
+        return yaml.safe_load(f)
 
 
-# consume work
-async def consumer(queue):
-    print('Consumer: Running')
-    # consume work
-    while True:
-        # get a unit of work
-        item = await queue.get()
-        # check for stop
-        if item is None:
-            break
-        # block
-        await asyncio.sleep(item[1])
-        # report
-        print(f'>got {item}')
-        # mark it as processed
-        queue.task_done()
-    # all done
-    print('Consumer: Done')
+def json_load(file) -> Dict:
+    with open(file, encoding="utf8") as f:
+        return json.load(f)
 
 
-# entry point coroutine
-async def main():
-    # create the shared queue
-    queue = asyncio.PriorityQueue()
-    # run the producer and consumers
-    await asyncio.gather(producer(queue), consumer(queue))
+def get_file_list(directory_path, file_type: FileTypes) -> List:
+    print(file_type, type(file_type), file_type == FileTypes.IMG, directory_path)
+    if file_type in [FileTypes.YAML, FileTypes.JSON, FileTypes.XML, FileTypes.TXT]:
+        return glob.glob(f"{directory_path}/*{file_type.value}")
 
 
-# start the asyncio program
-asyncio.run(main())
+def get_image_list(directory_path) -> List:
+    file_list = list()
+    for ext in ImageFormats:
+        _file_list = glob.glob(f"{directory_path}/*{ext.value}")
+        file_list.extend(_file_list)
+    return file_list
+
+
+def is_exists(filepath) -> bool:
+    return os.path.exists(filepath)
+
+
+def create_dir(dir_path) -> bool:
+    if not os.path.exists(dir_path):
+        os.mkdir(dir_path)
+    return True
