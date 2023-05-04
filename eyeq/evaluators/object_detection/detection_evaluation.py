@@ -52,7 +52,7 @@ class DetectionEvaluator:
         if self.plot:
             self.confusion_matrix = ConfusionMatrix(nc=self.n_c)  # overwrite confusion matrix
 
-    def add_groundtruth(self, gt: sv.Detections):
+    def add_groundtruth(self, gt: sv.Detections) -> None:
         self.groundtruths.append(gt)
 
     def add_prediction(self, det: sv.Detections):
@@ -107,4 +107,6 @@ class DetectionEvaluator:
 
         if self.plot:
             self.confusion_matrix.plot(normalize=True, save_dir=os.getcwd(), names=self.class_maps.values())
+        # total image, total instances, precision, recall, map50, map50:95
+        return seen, nt.sum(), mp, mr, map50, map
 
