@@ -1,5 +1,7 @@
 import numpy as np
-
+import supervision as sv
+from typing import List
+from dataclasses import astuple, dataclass
 
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
@@ -74,3 +76,30 @@ def iou_matrix(box1: np.ndarray, box2: np.ndarray):
     ious = iou(_box1, _box2)
     ious = np.reshape(ious, (box1.shape[0], box2.shape[0]))
     return ious
+
+
+
+def merge_detections(detections_list: List[sv.Detections]) -> sv.Detections:
+    if len(detections_list) == 0:
+        return sv.Detections.empty()
+
+    detections_tuples_list = [astuple(detection) for detection in detections_list]
+    xyxy, mask, confidence, class_id, tracker_id = [
+        list(field) for field in zip(*detections_tuples_list)
+    ]
+
+    all_not_none = lambda l: all(x is not None for x in l)
+
+    xyxy = np.vstack(xyxy)
+    mask = np.vstack(mask) if all_not_none(mask) else None
+    confidence = np.hstack(confidence) if all_not_none(confidence) else None
+    class_id = np.hstack(class_id) if all_not_none(class_id) else None
+    tracker_id = np.hstack(tracker_id) if all_not_none(tracker_id) else None
+
+    return sv.Detections(
+        xyxy=xyxy,
+        mask=mask,
+        confidence=confidence,
+        class_id=class_id,
+        tracker_id=tracker_id,
+    )

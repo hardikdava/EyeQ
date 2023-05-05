@@ -14,8 +14,12 @@ from eyeq.segmentors.yolov5.yolov5_onnx import Yolov5onnxSeg
 from eyeq.segmentors.yolov8.yolov8_onnx import Yolov8onnxSeg
 
 
+from eyeq.trackers.sort.sort import Sort
+
 # import dataset reader her
 from eyeq.dataset.yolo_parser import YoloLoader
 
 # import evaluatos reader her
 from eyeq.evaluators.object_detection.detection_evaluation import DetectionEvaluator
+
+
