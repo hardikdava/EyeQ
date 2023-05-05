@@ -33,8 +33,7 @@ EyeQ is a minimal computer vision inference pakackge. Currently it supports foll
 #### TODO:
 - [ ] Docker support
 - [ ] RestAPI server
-- [ ] Tracker support
-- [ ] Automatic annotation support
+- [ ] Automatic annotation support using clip, grounding dino and sam
 
 ### References:
 
