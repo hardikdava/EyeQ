@@ -42,6 +42,46 @@ def xywh_to_xyxy(boxes_xywh: np.ndarray) -> np.ndarray:
     return xyxy
 
 
+def iom(box1: np.ndarray, box2: np.ndarray):
+    """ Intersection over minimum
+
+    :param box1: array (n, 4) -> n x (x1, y1, x2, y2)
+    :param box2: array (n, 4) -> n x (x1, y1, x2, y2)
+    :return (n) -> n x iou
+    """
+    # determine the (x, y)-coordinates of the intersection rectangle
+    xA = np.maximum(box1[:, 0], box2[:, 0])
+    yA = np.maximum(box1[:, 1], box2[:, 1])
+    xB = np.minimum(box1[:, 2], box2[:, 2])
+    yB = np.minimum(box1[:, 3], box2[:, 3])
+    # compute the area of intersection rectangle
+    interArea = np.abs((np.maximum((xB - xA), 0)) * np.maximum((yB - yA), 0))
+    # compute the area of both the prediction and ground-truth
+    # rectangles
+    boxAArea = np.abs((box1[:, 0] - box1[:, 2]) * (box1[:, 1] - box1[:, 3]))
+    boxBArea = np.abs((box2[:, 0] - box2[:, 2]) * (box2[:, 1] - box2[:, 3]))
+    # compute the intersection over union by taking the intersection
+    # area and dividing it by the sum of prediction + ground-truth
+    # areas - the interesection area
+    iom = interArea / np.maximum(np.minimum(boxAArea, boxBArea), 1)
+    return iom
+
+
+def iom_matrix(box1: np.ndarray, box2: np.ndarray):
+    """
+    Returns an n_box1 x n_box2 matrix with calculated ious between all box pairs
+    :param box1: array (n, 4) -> n x (x1, y1, x2, y2)
+    :param box2: array (m, 4) -> m x (x1, y1, x2, y2)
+    :return (n, m) -> n x m x iou
+    """
+    if len(box2.shape) == 3:
+        box2 = box2[:, :, 0]
+    _box1 = np.repeat(box1, box2.shape[0], axis=0)
+    _box2 = np.tile(box2, (box1.shape[0], 1))
+    ioms = iom(_box1, _box2)
+    ioms = np.reshape(ioms, (box1.shape[0], box2.shape[0]))
+    return ioms
+
 
 
 def iou(box1: np.ndarray, box2: np.ndarray):

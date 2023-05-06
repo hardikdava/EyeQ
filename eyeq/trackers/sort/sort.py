@@ -207,6 +207,7 @@ class Sort(object):
         """
         Sets key parameters for SORT
         """
+        self.tracker_name = "sort"
         self.max_age = max_age
         self.min_hits = min_hits
         self.iou_threshold = iou_threshold

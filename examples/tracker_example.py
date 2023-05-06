@@ -4,7 +4,7 @@ from eyeq.inference_engine import InferenceEngine
 import cv2
 import time
 
-from eyeq import Yolov5onnxDet, Sort
+from eyeq import Yolov5onnxDet, Sort, BYTETracker
 
 video_path = "../data/images/pig.mp4"
 model_path = "../data/weights/yolov5s_pig_counter.onnx"
@@ -20,7 +20,7 @@ inference_engine.register_model(model=detector)
 inference_engine.load_network(model_id=detector.model_id, model_path=model_path)
 
 
-tracker = Sort()
+tracker = BYTETracker()
 
 time.sleep(2)
 counter = 0

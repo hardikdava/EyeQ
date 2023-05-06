@@ -143,6 +143,7 @@ class STrack(BaseTrack):
 
 class BYTETracker(object):
     def __init__(self, track_thresh=0.45, track_buffer=25, match_thresh=0.8, frame_rate=30):
+        self.tracker_name = "byte_track"
         self.tracked_stracks = []  # type: list[STrack]
         self.lost_stracks = []  # type: list[STrack]
         self.removed_stracks = []  # type: list[STrack]
