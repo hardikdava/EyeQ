@@ -4,22 +4,23 @@ import time
 import cv2
 import numpy as np
 import supervision as sv
-from eyeq.utils.painter import draw_boxes, draw_tracklets
-from eyeq.utils.general import get_image_list, get_file_list
-from eyeq.utils.namespaces import FileTypes
+from eyeq.utils.painter import draw_tracklets
+from eyeq.utils.general import get_image_list
 
-from eyeq import Yolov5onnxDet, BYTETracker, NmsSort, Sort, MoTDataset, MOTBenchmark, OCSort
+
+from eyeq import BYTETracker, OCSort
+from eyeq import MoTDataset, MOTBenchmark
 from eyeq.utils.fps_monitor import FpsMonitor
 
 mot_sequence = "../data/MOT20/train/MOT20-01"
 image_dir = f"{mot_sequence}/img1"
 gt_path = f"{mot_sequence}/gt/gt.txt"
 
-run_evaluation = False
+to_save = False
 
 fps_monitor = FpsMonitor()
-# tracker = BYTETracker()
-# tracker = Sort()
+
+tracker = BYTETracker()
 # tracker = OCSort()
 
 mot_data = MoTDataset(video_sequence_name=mot_sequence, tracker_name=tracker.tracker_name)
@@ -43,12 +44,16 @@ for f in range(len(image_list)):
         detections = sv.Detections(xyxy=xywh, class_id=class_id, tracker_id=tracker_id, confidence=confidence)
 
     tracklets_track = tracker.update_public(detections=detections)
-    # if tracklets_track:
-    #     img = draw_tracklets(img, tracklets_track)
-    mot_data.add_tracklets(frame=f, tracklets=tracklets_track)
+    tracklets_track_cp = tracklets_track
+    if tracklets_track:
+        img = draw_tracklets(img, tracklets_track_cp)
+    if to_save:
+        mot_data.add_tracklets(frame=f, tracklets=tracklets_track)
 
     img = cv2.resize(img, (0,0), fx=0.5, fy=0.5)
     cv2.imshow("MOT", img)
     cv2.waitKey(1)
 
-mot_data.write()
+if to_save:
+    mot_data.write()
+

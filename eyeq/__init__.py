@@ -9,12 +9,13 @@ from eyeq.detectors.yolov7.yolov7_onnx import Yolov7onnxDet
 from eyeq.detectors.yolov8.yolov8_onnx import Yolov8onnxDet
 from eyeq.detectors.damoyolo.damoyolo_onnx import DamoYoloonnxDet
 
+
 # import all segmentors here
 from eyeq.segmentors.yolov5.yolov5_onnx import Yolov5onnxSeg
 from eyeq.segmentors.yolov8.yolov8_onnx import Yolov8onnxSeg
 
 
-from eyeq.trackers.sort.sort import Sort
+# from eyeq.trackers.sort.sort import Sort
 from eyeq.trackers.byte_track.bytetrack import BYTETracker
 from eyeq.trackers.oc_sort.ocsort import OCSort
 
